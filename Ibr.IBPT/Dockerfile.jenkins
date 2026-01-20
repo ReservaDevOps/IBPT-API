@@ -1,0 +1,11 @@
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+ARG venv=Production
+ENV ASPNETCORE_ENVIRONMENT=${venv}
+
+COPY publish/Ibr.IBPT/ .
+
+ENTRYPOINT ["dotnet", "Ibr.IBPT.dll"]
