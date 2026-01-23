@@ -16,7 +16,7 @@ public class IbptTaxRepository : IIbptTaxRepository
         _dataContext = dataContext;
     }
 
-    public async Task<IbptTax?> GetIbptTaxAsync(string uf, string code, string ex = "")
+    public async Task<IbptTax?> GetIbptTaxAsync(string uf, string code, string ex = "") //
     {
         return await _dataContext.IBPTTaxes.AsNoTracking()
             .FirstOrDefaultAsync(x => x.UF.Trim().ToUpper() == uf.Trim().ToUpper() &&

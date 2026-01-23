@@ -12,21 +12,16 @@ public static class FileService
         "AL", "SE", "BA", "MG", "ES", "RJ", "SP", "PR", "SC", "RS", "MS", "MT", "GO", "DF"
     };
 
-    public static string[] GetLinesToInsert(IFormFile file)
+    public static string[] GetLinesToInsert(Stream stream)
     {
-        byte[] fileBytes;
-        using (var ms = new MemoryStream())
-        {
-            file.CopyTo(ms);
-            fileBytes = ms.ToArray();
-        }
+        using var ms = new MemoryStream();
+        stream.CopyTo(ms);
 
-        var utf8 = new UTF8Encoding();
-        var text = utf8.GetString(fileBytes);
+        var text = Encoding.UTF8.GetString(ms.ToArray());
         return text.Split('\n');
     }
 
-    public static string[] CleanColumns(string[] columns)
+    public static string[] CleanColumns(string[] columns) //
     {
         for (var i = 0; i < columns.Length; i++)
             columns[i] = columns[i].Trim().Replace("\"", "").Replace("\r", "");
@@ -34,9 +29,9 @@ public static class FileService
         return columns;
     }
 
-    public static bool UfIsValid(string uf) => UFs.Contains(uf);
+    public static bool UfIsValid(string uf) => UFs.Contains(uf); //
 
-    public static DateTime GetDate(string date)
+    public static DateTime GetDate(string date) //
     {
         var dateTime = DateTime.Parse(date, _cultureInfo);
         return SetKindUtc(dateTime);

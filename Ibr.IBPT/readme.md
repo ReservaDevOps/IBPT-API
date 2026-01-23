@@ -6,6 +6,7 @@ API para upload/consulta da tabela IBPT e calculo de tributos associados, com su
 - Swagger pronto para exploracao e teste de endpoints.
 - EF Core com chave primaria composta para a tabela IBPT.
 - Modo dev sem Postgres local (SQLite auto-criado).
+- Seed automatico de dados IBPT 2025 em ambiente de desenvolvimento.
 
 ## Stack
 - .NET 10
@@ -45,8 +46,3 @@ Para aplicar migrations no Postgres (se necessario):
 ```bash
 dotnet tool install -g dotnet-ef
 dotnet ef database update --project Ibr.IBPT/Ibr.IBPT.csproj
-```
-
-## Observacoes
-- Em SQLite usamos `EnsureCreated` na inicializacao, sem aplicar migrations.
-- A API nao possui consumers; todo processamento e via HTTP.
